@@ -1,9 +1,11 @@
 * {
     box-sizing: border-box;
+    text-decoration: none;
   }
 html{
     font-family: 'Roboto', sans-serif;
 }
+
 .topo {
     display: flex;
     justify-content: center;
@@ -14,7 +16,7 @@ html{
     color: #E8833A;
     background-color: #C3CFD9;
 }
-.txtselecionefilme{
+.txt-selecione-filme{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,8 +32,7 @@ html{
 }
 
 .filme{
-   width: 40%;
-   
+   width: 100%;
    border-style: solid;
    border-width: 6px;
    border-color: aliceblue;
@@ -40,8 +41,162 @@ html{
    flex-wrap: wrap;
    margin-bottom: 26px;
 }
-.filme img{
+
+.bloco-horario{
+    margin-left: 25px;
+    
+    font-size: 20px;
+    font-weight: 400;
+}
+.bloco-horario .bloco-hora {
+    display: flex;
+    color: white;
+    font-size: 18px;
+    font-weight: 400;
+}
+.bloco-hora div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 83px;
+    height: 43px;
+    margin-right: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    background-color: #E8833A;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.teste {
+   width: 42%;  
+}
+.faixa-centraliza{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.assentos{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 440px;
+    
+}
+.assento {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    font-size: 11px;
+    background-color: #C3CFD9;
+    border-radius: 12px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #808F9D;
+    margin: 18px 7px;
+    
+}
+
+.space-betweem{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+.selecionado{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 11px;
+    background-color: #8DD7CF;
+    border-radius: 12px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #1AAE9E;
+    margin: 18px 7px;
+}
+
+.disponivel{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 11px;
+    background-color: #C3CFD9;
+    border-radius: 12px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #7B8B99;
+    margin: 18px 7px;
+}
+.indisponivel{
+    width: 30px;
+    height: 30px;
+    font-size: 11px;
+    background-color: #FBE192;
+    border-radius: 12px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #F7C52B;
+    margin: 18px 7px;
+}
+.bloco-input{
+    margin-top: 30px;
+    margin-left: 15px;
+    margin-bottom: 30px;
+}
+.input{
+    width: 90%;
+    height: 51px;
+}
+
+.centraliza{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.button{
+    width: 225px;
+    height: 42px;
+    background-color: #E8833A;
+    color: white;
+    border: 3px;
+    font-size: 18px;
+    font-weight: 400;
+    
+}
+.txt-pedido-efetuado{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 110px;
+    font-size: 24px;
+    color: #247A6B;
+    font-weight: 700;
+    font-size: 24px;
+}
+.titulo{
+    font-size: 20px;
+    font-weight: 700;
+    color: #293845;
+    margin-bottom: 5px;
+}
+.bloco-finalizacao{
+margin-bottom: 35px;
+}
+
+.txt-finalizacao{
+font-size: 17px;
+}
+.bloco-geral{
+    margin-left: 15px;
 }
