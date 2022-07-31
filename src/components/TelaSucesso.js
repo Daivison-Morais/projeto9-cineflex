@@ -3,6 +3,26 @@ import { useNavigate } from "react-router-dom"
 
 export default function TelaSucesso() {
 
+
+   
+    /* const [horariofilme, setHorariofilme] = useState([]);
+    const [namefilme, setNamefilme] = useState([]); */
+ 
+
+   /*  useEffect(() => {
+        
+        const promisse = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${params2.idsessao}/seats`);
+        promisse.then((resposta) => {
+    
+          
+            setNamefilme(resposta.data.movie.title);
+            
+            setHorariofilme(resposta.data.day.weekday);
+        
+            
+        })
+    }, []) */
+
     const navigate = useNavigate();
 
     return (
@@ -15,8 +35,8 @@ export default function TelaSucesso() {
 <div className="bloco-geral">
             <div className="bloco-finalizacao">
                 <div className="titulo">Filme e sessão</div>
-                <div className="txt-finalizacao">nome do filme</div>
-                <div className="txt-finalizacao">horario</div>
+                <div className="txt-finalizacao">name filme</div>
+                <div className="txt-finalizacao">horario filme</div>
             </div>
 
             <div className="bloco-finalizacao">

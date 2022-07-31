@@ -1,4 +1,3 @@
-import Rodape from "./Rodape";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -9,10 +8,11 @@ export default function AssentoEscolha() {
     function handleForm(event) {
         event.preventDefault();
         if (isCpf.isValid(cpf)) {
-            navigate(`/sucesso/`)
+            navigate(`/sucesso`)
         }
     }
 
+    
     const [cpf, setCpf] = useState("")
     const params2 = useParams();
     const navigate = useNavigate();
@@ -21,7 +21,12 @@ export default function AssentoEscolha() {
     const [sessaorodape, setsessaorodape] = useState([]);
     const [horariofilme, setHorariofilme] = useState([]);
     const [namefilme, setNamefilme] = useState([]);
+    const [controleAssentos, setControleAssentos] = useState([]);
+    
 
+    
+   
+   
 
 
     useEffect(() => {
@@ -30,15 +35,49 @@ export default function AssentoEscolha() {
         promisse.then((resposta) => {
             setAssentos(resposta.data.seats);
             setPostrodape(resposta.data.movie.posterURL);
-            setNamefilme(resposta.data.movie.title)
+            setNamefilme(resposta.data.movie.title);
             setsessaorodape(resposta.data);
-            setHorariofilme(resposta.data.day.weekday)
+            setHorariofilme(resposta.data.day.weekday);
+            setControleAssentos(resposta.data.seats.isAvailable);
+         
             
-
         })
     }, [])
+     
+
+    function Assento({numAssento, isAvailable}) {
+       
+        const [corSelecionado, setCorSelecionado] = useState("");
+
+        function EhDisponivel (){
+         
+            if(corSelecionado === ""){
+                setCorSelecionado("cor-selecionado")      
+            }
+            if(corSelecionado === "cor-selecionado"){
+                setCorSelecionado("")  
+            }
+
+        } 
+
+        if(isAvailable){
+            return (
+                <div className={`assento cor-disponivel ${corSelecionado}`}  onClick={EhDisponivel}>
+                    {numAssento}
+                </div>
+            )
+        } else{
+            return (
+                <div className="assento cor-indisponivel"  onClick={()=>alert("está indisponível")}  >
+                    {numAssento}
+                </div>
+            )
+        }
+        
+    }
 
     return (
+
         <>
             <div className="txt-selecione-filme">
                 Selecione o(s) Assento(s)
@@ -49,10 +88,8 @@ export default function AssentoEscolha() {
 
                     {assentos.map(assento => (
 
-                        <div className="assento" >
-                            {assento.name}
-                        </div>
-
+                        <Assento numAssento={assento.name} isAvailable={assento.isAvailable}/>
+                        
                     ))}
 
                 </div>

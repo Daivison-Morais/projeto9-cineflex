@@ -102,13 +102,11 @@ html{
     width: 30px;
     height: 30px;
     font-size: 11px;
-    background-color: #C3CFD9;
+    cursor: pointer;
     border-radius: 12px;
     border-style: solid;
     border-width: 1px;
-    border-color: #808F9D;
-    margin: 18px 7px;
-    
+    margin: 18px 7px;   
 }
 
 .space-betweem{
@@ -131,6 +129,7 @@ html{
     margin: 18px 7px;
 }
 
+
 .disponivel{
     display: flex;
     justify-content: space-between;
@@ -145,6 +144,10 @@ html{
     border-color: #7B8B99;
     margin: 18px 7px;
 }
+.cor-disponivel{
+    background-color: #C3CFD9;
+    border-color: #7B8B99;
+}
 .indisponivel{
     width: 30px;
     height: 30px;
@@ -155,6 +158,10 @@ html{
     border-width: 1px;
     border-color: #F7C52B;
     margin: 18px 7px;
+}
+.cor-indisponivel{
+    border-color: #F7C52B;
+    background-color: #FBE192;
 }
 .bloco-input{
     margin-top: 30px;
@@ -238,4 +245,8 @@ font-size: 17px;
     font-weight: 400; 
     color: #293845;
     margin: 7px 10px;
+}
+.cor-selecionado{
+    border-color: #1AAE9E;
+    background-color: #8DD7CF;
 }
