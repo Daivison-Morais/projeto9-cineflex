@@ -1,36 +1,46 @@
+import Rodape from "./Rodape";
 import axios from "axios";
 import { useEffect, useState } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-
-
-function ItemHorario (){
-    return (
-        <>
-                Quinta-feira-24/06/21
-                <div className="bloco-hora">
-                    <div>15:00</div>
-                    <div>17:00</div>
-                </div>
-        </>
-    )
-}
-
-
-export default function HorarioEscolha (){
-
+export default function HorarioEscolha() {
     const navigate = useNavigate();
-
+    const params = useParams();
     
+    const [sessoes, setSessoes] = useState([]);
+    const [infrodape, setInfrodape] = useState([]);
+
+    useEffect(() => {
+        console.log(params);
+        const promisse = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/movies/${params.idfilme}/showtimes`);
+        promisse.then((resposta) => {
+            setSessoes(resposta.data.days);
+            setInfrodape(resposta.data)
+        })
+    }, [])
+
     return (
         <>
-      <div className="txt-selecione-filme">
+            <div className="txt-selecione-filme">
                 Selecione Horário
             </div>
-            
-            <div className="bloco-horario" onClick={()=>navigate("/sessao/:idsessao")}>
-                <ItemHorario/>
-            </div>
+
+            {sessoes.map(value => (
+
+                <div className="bloco-horario" >
+                    {value.weekday}-{value.date}
+                    <div className="bloco-hora">
+                        <div className="hora" onClick={() => navigate(`/sessao/${value.showtimes[0].id}`)}>{value.showtimes[0].name}</div>
+                        <div className="hora" onClick={() => navigate(`/sessao/${value.showtimes[1].id}`)}>{value.showtimes[1].name}</div>
+                    </div>
+
+                </div>
+
+            ))}
+
+            <Rodape infrodape={infrodape}/>
+
+
         </>
     )
 }

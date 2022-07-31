@@ -9,7 +9,6 @@ import TelaSucesso from "./TelaSucesso";
 
 export default function App() {
   return (
-    <>
       <BrowserRouter>
         <Topo />
         <Routes>
@@ -17,10 +16,7 @@ export default function App() {
           <Route path="/filmes/:idfilme" element={<HorarioEscolha />}/>
           <Route path="/sessao/:idsessao" element={<AssentoEscolha />}/>
           <Route path="/sucesso" element={<TelaSucesso />}/>
-      
         </Routes>
       </BrowserRouter>
-
-    </>
   )
 }

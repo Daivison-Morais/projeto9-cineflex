@@ -1,21 +1,20 @@
 import axios from "axios";
 import { useState, useEffect, } from "react";
-import { Link, useParams } from "react-router-dom";
-import HorarioEscolha from "./HorarioEscolha";
+import { Link } from "react-router-dom";
 
 
+function ItemFilme({ src, keys }) {
 
-function ItemFilme({ src }) {
     return (
-        <Link className="teste" to="/filmes/:idfilme">
+        <Link className="teste" to={`/filmes/${keys}`}>
             <img className="filme" src={src} alt="" />
+            
         </Link>
+        
     )
 }
 
 export default function FilmeEscolha() {
-
-    const params = useParams();
 
     const [image, setImage] = useState([]);
     
@@ -23,7 +22,6 @@ export default function FilmeEscolha() {
         const promisse = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/movies/`);
         promisse.then((resposta) => {
             setImage(resposta.data)
-
         })
     }, [])
 
@@ -37,9 +35,11 @@ export default function FilmeEscolha() {
             <div className="blocofilmes">
 
                 {image.map((value) => (
-                    <ItemFilme src={value.posterURL} />
+                    <ItemFilme keys={value.id} src={value.posterURL} />
                 ))}
+                
             </div>
+            
 
         </>
     )
