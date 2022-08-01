@@ -15,7 +15,7 @@ export default function HorarioEscolha() {
         const promisse = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/movies/${params.idfilme}/showtimes`);
         promisse.then((resposta) => {
             setSessoes(resposta.data.days);
-            setInfrodape(resposta.data)
+            setInfrodape(resposta.data);
         })
     }, [])
 

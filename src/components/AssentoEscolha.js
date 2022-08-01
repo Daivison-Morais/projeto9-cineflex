@@ -8,7 +8,7 @@ export default function AssentoEscolha() {
     function handleForm(event) {
         event.preventDefault();
         if (isCpf.isValid(cpf)) {
-            navigate("/sucesso", { state: { name: nome,  cpf: cpf, ids: array, namefilme: namefilme, horariofilme: horariofilme} })
+            navigate("/sucesso", { state: { name: nome,  cpf: cpf, nump: nump, namefilme: namefilme, horariofilme: horariofilme} })
         }
 
          const body = {
@@ -30,6 +30,7 @@ export default function AssentoEscolha() {
     const [horariofilme, setHorariofilme] = useState([]);
     const [namefilme, setNamefilme] = useState([]);
     const [array, setArray] = useState([]);
+    const [nump, SetNump] = useState([]);
     const [nome, setNome] = useState("");
     const [cpf, setCpf] = useState("");
     
@@ -46,8 +47,9 @@ export default function AssentoEscolha() {
     }, [])
 
     console.log("array:", array);
+    console.log(nump);
 
-    function Assento({ numAssento, isAvailable, idAssento, array, setArray }) {
+    function Assento({ numAssento, isAvailable, idAssento, array, setArray, numpoutrona }) {
 
         let corSelecionado = "";
         const [assentoselecionado, setAssentoselecionado] = useState(false);
@@ -63,16 +65,24 @@ export default function AssentoEscolha() {
          
             if(array.includes(idAssento) === true){
                 const arrayaux = [...array];
+                const numpaux = [...nump];
                 for(let i = 0; i < array.length; i++){
                     if(idAssento === array[i]){
                         arrayaux.splice(i, 1);
                         setArray(arrayaux);
                        
                     }
+                    if(numpoutrona === nump[i]){
+                        numpaux.splice(i, 1);
+                        SetNump(numpaux);
+                       
+                    }
                 }
+
             } else{
                 setArray([...array, idAssento])
-                                
+                SetNump([...nump, numpoutrona])
+
             }
            
         }
@@ -103,9 +113,9 @@ export default function AssentoEscolha() {
             <div className="faixa-centraliza">
                 <div className="assentos">
 
-                    {assentos.map(assento => (
+                    {assentos.map((assento, index)=> (
 
-                        <Assento numAssento={assento.name} isAvailable={assento.isAvailable} idAssento={assento.id} array={array} setArray={setArray}/>
+                        <Assento  numpoutrona={`${index+1} `} numAssento={assento.name} isAvailable={assento.isAvailable} idAssento={assento.id} array={array} setArray={setArray}/>
 
                     ))}
 
@@ -145,7 +155,7 @@ export default function AssentoEscolha() {
 
                 <div className="bloco-input">
                     CPF do comprador
-                    <input placeholder="Digite seu CPF..." className="input"
+                    <input placeholder="Digite seu CPF... xxxxxxxxxxx" className="input"
                         type="text"
                         pattern="([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})"
                         value={cpf}

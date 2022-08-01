@@ -23,7 +23,7 @@ export default function TelaSucesso() {
 
             <div className="bloco-finalizacao">
                 <div className="titulo">Ingressos</div>
-                <div className="txt-finalizacao">{ location.state.ids }</div>
+                <div className="txt-finalizacao"> Assento(s): { location.state.nump }</div>
             </div>
 
             <div className="bloco-finalizacao">
