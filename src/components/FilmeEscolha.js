@@ -25,7 +25,6 @@ export default function FilmeEscolha() {
         })
     }, [])
 
-
     return (
         <>
             <div className="txt-selecione-filme">
@@ -39,7 +38,6 @@ export default function FilmeEscolha() {
                 ))}
                 
             </div>
-            
 
         </>
     )

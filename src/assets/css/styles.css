@@ -7,6 +7,7 @@ html{
 }
 .root{
     margin-top: 67px;
+    margin-bottom: 90px;
 }
 
 .topo {
@@ -28,6 +29,7 @@ html{
     align-items: center;
     height: 110px;
     font-size: 24px;
+
 }
 .blocofilmes{
     display: flex;
@@ -47,6 +49,7 @@ html{
    box-shadow: 0px 0px 9px 2px black;
    flex-wrap: wrap;
    margin-bottom: 26px;
+   
 }
 
 .bloco-horario{
@@ -107,6 +110,8 @@ html{
     border-style: solid;
     border-width: 1px;
     margin: 18px 7px;   
+    background-color: #C3CFD9;
+    border-color: #7B8B99;
 }
 
 .space-betweem{
@@ -178,6 +183,8 @@ html{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-right: 9px;
+    margin-left: 9px;
 }
 .button{
     width: 225px;
@@ -187,7 +194,8 @@ html{
     border: 3px;
     font-size: 18px;
     font-weight: 400;
-    
+    margin-bottom: 90px;
+    cursor: pointer;
 }
 .txt-pedido-efetuado{
     display: flex;
@@ -246,7 +254,11 @@ font-size: 17px;
     color: #293845;
     margin: 7px 10px;
 }
+
+
 .cor-selecionado{
+    width: 40px;
     border-color: #1AAE9E;
     background-color: #8DD7CF;
 }
+

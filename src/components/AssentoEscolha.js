@@ -8,12 +8,20 @@ export default function AssentoEscolha() {
     function handleForm(event) {
         event.preventDefault();
         if (isCpf.isValid(cpf)) {
-            navigate(`/sucesso`)
+            navigate("/sucesso", { state: { name: nome,  cpf: cpf, ids: array, namefilme: namefilme, horariofilme: horariofilme} })
         }
+
+         const body = {
+            ids: array,
+            name: nome,
+            cpf: cpf
+        }
+
+        const requisicao = axios.post("https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many", body);
+
     }
 
     
-    const [cpf, setCpf] = useState("")
     const params2 = useParams();
     const navigate = useNavigate();
     const [assentos, setAssentos] = useState([]);
@@ -21,16 +29,12 @@ export default function AssentoEscolha() {
     const [sessaorodape, setsessaorodape] = useState([]);
     const [horariofilme, setHorariofilme] = useState([]);
     const [namefilme, setNamefilme] = useState([]);
-    const [controleAssentos, setControleAssentos] = useState([]);
+    const [array, setArray] = useState([]);
+    const [nome, setNome] = useState("");
+    const [cpf, setCpf] = useState("");
     
-
-    
-   
-   
-
-
     useEffect(() => {
-        console.log("params2:", params2);
+
         const promisse = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${params2.idsessao}/seats`);
         promisse.then((resposta) => {
             setAssentos(resposta.data.seats);
@@ -38,47 +42,60 @@ export default function AssentoEscolha() {
             setNamefilme(resposta.data.movie.title);
             setsessaorodape(resposta.data);
             setHorariofilme(resposta.data.day.weekday);
-            setControleAssentos(resposta.data.seats.isAvailable);
-         
-            
         })
     }, [])
-     
 
-    function Assento({numAssento, isAvailable}) {
-       
-        const [corSelecionado, setCorSelecionado] = useState("");
+    console.log("array:", array);
 
-        function EhDisponivel (){
+    function Assento({ numAssento, isAvailable, idAssento, array, setArray }) {
+
+        let corSelecionado = "";
+        const [assentoselecionado, setAssentoselecionado] = useState(false);
+        if(assentoselecionado === true){
+            corSelecionado = "cor-selecionado";
+        } else{
+            corSelecionado = "";
+        }
+    
+        function ehSelecionado() {
+
+            setAssentoselecionado(!assentoselecionado);
          
-            if(corSelecionado === ""){
-                setCorSelecionado("cor-selecionado")      
+            if(array.includes(idAssento) === true){
+                const arrayaux = [...array];
+                for(let i = 0; i < array.length; i++){
+                    if(idAssento === array[i]){
+                        arrayaux.splice(i, 1);
+                        setArray(arrayaux);
+                       
+                    }
+                }
+            } else{
+                setArray([...array, idAssento])
+                                
             }
-            if(corSelecionado === "cor-selecionado"){
-                setCorSelecionado("")  
-            }
+           
+        }
 
-        } 
-
-        if(isAvailable){
+        if (isAvailable) {
             return (
-                <div className={`assento cor-disponivel ${corSelecionado}`}  onClick={EhDisponivel}>
+                <div className={`assento cor-disponivel ${corSelecionado}`} onClick={ehSelecionado}>
                     {numAssento}
                 </div>
             )
-        } else{
+        } else {
             return (
-                <div className="assento cor-indisponivel"  onClick={()=>alert("está indisponível")}  >
+                <div className="assento cor-indisponivel" onClick={() => alert("Esse assento não está disponível")} >
                     {numAssento}
                 </div>
             )
         }
-        
     }
 
     return (
 
         <>
+
             <div className="txt-selecione-filme">
                 Selecione o(s) Assento(s)
             </div>
@@ -88,8 +105,8 @@ export default function AssentoEscolha() {
 
                     {assentos.map(assento => (
 
-                        <Assento numAssento={assento.name} isAvailable={assento.isAvailable}/>
-                        
+                        <Assento numAssento={assento.name} isAvailable={assento.isAvailable} idAssento={assento.id} array={array} setArray={setArray}/>
+
                     ))}
 
                 </div>
@@ -115,12 +132,15 @@ export default function AssentoEscolha() {
                 </div>
             </div>
 
-
             <form onSubmit={handleForm}>
                 <div className="bloco-input">
                     Nome do comprador
+
                     <input placeholder="Digite seu nome..." className="input"
-                        required></input>
+                        type="text"
+                        value={nome}
+                        onChange={(event) => setNome(event.target.value)}
+                        required />
                 </div>
 
                 <div className="bloco-input">
@@ -136,7 +156,7 @@ export default function AssentoEscolha() {
                 </div>
 
                 <div className="faixa-centraliza">
-                    <button className="button" > Reservar assentos</button>
+                    <button className="button" type="submit"> Reservar assentos</button>
                 </div>
             </form>
 
