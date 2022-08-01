@@ -18,7 +18,8 @@ export default function TelaSucesso() {
             <div className="bloco-finalizacao">
                 <div className="titulo">Filme e sessão</div>
                 <div className="txt-finalizacao">{ location.state.namefilme }</div>
-                <div className="txt-finalizacao">{ location.state.horariofilme}</div>
+                
+                <div className="txt-finalizacao"> {location.state.data}  { location.state.horario}</div>
             </div>
 
             <div className="bloco-finalizacao">

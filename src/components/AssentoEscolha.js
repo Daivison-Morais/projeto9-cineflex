@@ -2,13 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { cpf as isCpf } from "cpf-cnpj-validator";
+import Assento from "./Assento";
 
 export default function AssentoEscolha() {
 
     function handleForm(event) {
         event.preventDefault();
         if (isCpf.isValid(cpf)) {
-            navigate("/sucesso", { state: { name: nome,  cpf: cpf, nump: nump, namefilme: namefilme, horariofilme: horariofilme} })
+            navigate("/sucesso", { state: { name: nome,  cpf: cpf, nump: nump, namefilme: namefilme, horariofilme: horariofilme, horario: sessaorodape.name, data: data} })
         }
 
          const body = {
@@ -33,6 +34,7 @@ export default function AssentoEscolha() {
     const [nump, SetNump] = useState([]);
     const [nome, setNome] = useState("");
     const [cpf, setCpf] = useState("");
+    const [data, setData] = useState("");
     
     useEffect(() => {
 
@@ -43,64 +45,13 @@ export default function AssentoEscolha() {
             setNamefilme(resposta.data.movie.title);
             setsessaorodape(resposta.data);
             setHorariofilme(resposta.data.day.weekday);
+            setData(resposta.data.day.date);
         })
     }, [])
 
     console.log("array:", array);
     console.log(nump);
 
-    function Assento({ numAssento, isAvailable, idAssento, array, setArray, numpoutrona }) {
-
-        let corSelecionado = "";
-        const [assentoselecionado, setAssentoselecionado] = useState(false);
-        if(assentoselecionado === true){
-            corSelecionado = "cor-selecionado";
-        } else{
-            corSelecionado = "";
-        }
-    
-        function ehSelecionado() {
-
-            setAssentoselecionado(!assentoselecionado);
-         
-            if(array.includes(idAssento) === true){
-                const arrayaux = [...array];
-                const numpaux = [...nump];
-                for(let i = 0; i < array.length; i++){
-                    if(idAssento === array[i]){
-                        arrayaux.splice(i, 1);
-                        setArray(arrayaux);
-                       
-                    }
-                    if(numpoutrona === nump[i]){
-                        numpaux.splice(i, 1);
-                        SetNump(numpaux);
-                       
-                    }
-                }
-
-            } else{
-                setArray([...array, idAssento])
-                SetNump([...nump, numpoutrona])
-
-            }
-           
-        }
-
-        if (isAvailable) {
-            return (
-                <div className={`assento cor-disponivel ${corSelecionado}`} onClick={ehSelecionado}>
-                    {numAssento}
-                </div>
-            )
-        } else {
-            return (
-                <div className="assento cor-indisponivel" onClick={() => alert("Esse assento não está disponível")} >
-                    {numAssento}
-                </div>
-            )
-        }
-    }
 
     return (
 
@@ -115,7 +66,7 @@ export default function AssentoEscolha() {
 
                     {assentos.map((assento, index)=> (
 
-                        <Assento  numpoutrona={`${index+1} `} numAssento={assento.name} isAvailable={assento.isAvailable} idAssento={assento.id} array={array} setArray={setArray}/>
+                        <Assento  numpoutrona={`${index+1} `} numAssento={assento.name} nump={nump} SetNump={SetNump}  isAvailable={assento.isAvailable} idAssento={assento.id} array={array} setArray={setArray}/>
 
                     ))}
 

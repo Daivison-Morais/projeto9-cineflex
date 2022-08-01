@@ -1,11 +1,13 @@
 * {
     box-sizing: border-box;
     text-decoration: none;
-  }
-html{
+}
+
+html {
     font-family: 'Roboto', sans-serif;
 }
-.root{
+
+.root {
     margin-top: 67px;
     margin-bottom: 90px;
 }
@@ -23,7 +25,8 @@ html{
     top: 0px;
     left: 0px;
 }
-.txt-selecione-filme{
+
+.txt-selecione-filme {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,44 +34,48 @@ html{
     font-size: 24px;
 
 }
-.blocofilmes{
+
+.blocofilmes {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-    min-height: 400px;  
-    flex-wrap: wrap; 
+    min-height: 400px;
+    flex-wrap: wrap;
 }
 
 
-.filme{
-   width: 100%;
-   border-style: solid;
-   border-width: 6px;
-   border-color: aliceblue;
-   border-radius: 4px;
-   box-shadow: 0px 0px 9px 2px black;
-   flex-wrap: wrap;
-   margin-bottom: 26px;
-   
+.filme {
+    width: 100%;
+    border-style: solid;
+    border-width: 6px;
+    border-color: aliceblue;
+    border-radius: 4px;
+    box-shadow: 0px 0px 9px 2px black;
+    flex-wrap: wrap;
+    margin-bottom: 26px;
+
 }
 
-.bloco-horario{
+.bloco-horario {
     margin-left: 25px;
-    
+
     font-size: 20px;
     font-weight: 400;
 }
+
 .bloco-horario .bloco-hora {
     display: flex;
     color: white;
     font-size: 18px;
     font-weight: 400;
 }
+
 .bloco-hora div {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .hora {
     width: 83px;
     height: 43px;
@@ -81,9 +88,10 @@ html{
 }
 
 .teste {
-   width: 42%;  
+    width: 42%;
 }
-.faixa-centraliza{
+
+.faixa-centraliza {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,13 +99,15 @@ html{
     padding-top: 15px;
     padding-bottom: 15px;
 }
-.assentos{
+
+.assentos {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     width: 440px;
-    
+
 }
+
 .assento {
     display: flex;
     justify-content: center;
@@ -109,17 +119,18 @@ html{
     border-radius: 12px;
     border-style: solid;
     border-width: 1px;
-    margin: 18px 7px;   
+    margin: 18px 7px;
     background-color: #C3CFD9;
     border-color: #7B8B99;
 }
 
-.space-betweem{
+.space-betweem {
     display: flex;
     justify-content: space-between;
-    width: 50%;
+    width: 60%;
 }
-.selecionado{
+
+.selecionado {
     display: flex;
     justify-content: space-between;
     width: 50%;
@@ -135,7 +146,7 @@ html{
 }
 
 
-.disponivel{
+.disponivel {
     display: flex;
     justify-content: space-between;
     width: 50%;
@@ -149,11 +160,13 @@ html{
     border-color: #7B8B99;
     margin: 18px 7px;
 }
-.cor-disponivel{
+
+.cor-disponivel {
     background-color: #C3CFD9;
     border-color: #7B8B99;
 }
-.indisponivel{
+
+.indisponivel {
     width: 30px;
     height: 30px;
     font-size: 11px;
@@ -164,21 +177,24 @@ html{
     border-color: #F7C52B;
     margin: 18px 7px;
 }
-.cor-indisponivel{
+
+.cor-indisponivel {
     border-color: #F7C52B;
     background-color: #FBE192;
 }
-.bloco-input{
+
+.bloco-input {
     margin-top: 30px;
     margin-left: 15px;
     margin-bottom: 30px;
 }
-.input{
+
+.input {
     width: 90%;
     height: 51px;
 }
 
-.centraliza{
+.centraliza {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -186,7 +202,8 @@ html{
     margin-right: 9px;
     margin-left: 9px;
 }
-.button{
+
+.button {
     width: 225px;
     height: 42px;
     background-color: #E8833A;
@@ -194,10 +211,11 @@ html{
     border: 3px;
     font-size: 18px;
     font-weight: 400;
-    margin-bottom: 90px;
+    margin-bottom: 10px;
     cursor: pointer;
 }
-.txt-pedido-efetuado{
+
+.txt-pedido-efetuado {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -208,26 +226,33 @@ html{
     font-weight: 700;
     font-size: 24px;
 }
-.titulo{
+
+.titulo {
     font-size: 20px;
     font-weight: 700;
     color: #293845;
     margin-bottom: 5px;
 }
-.bloco-finalizacao{
-margin-bottom: 35px;
+
+.bloco-finalizacao {
+    margin-bottom: 35px;
 }
 
-.txt-finalizacao{
-font-size: 17px;
+.txt-finalizacao {
+    font-size: 17px;
+    margin-bottom: 5px;
+    font-size: 22px;
+    font-weight: 400;
+    color: #293845;
 }
-.bloco-geral{
+
+.bloco-geral {
     margin-left: 15px;
 }
 
-.rodape{
+.rodape {
     display: flex;
-    justify-content:flex-start;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
     height: 89px;
@@ -237,7 +262,8 @@ font-size: 17px;
     bottom: 0px;
     left: 0px;
 }
-.img-filme{
+
+.img-filme {
     display: flex;
     border-style: solid;
     border-width: 3px;
@@ -248,17 +274,14 @@ font-size: 17px;
     height: 72px;
 }
 
-.txt-rodape{
-    font-size: 26px; 
-    font-weight: 400; 
+.txt-rodape {
+    font-size: 26px;
+    font-weight: 400;
     color: #293845;
     margin: 7px 10px;
 }
 
-
-.cor-selecionado{
-    width: 40px;
+.cor-selecionado {
     border-color: #1AAE9E;
     background-color: #8DD7CF;
 }
-
