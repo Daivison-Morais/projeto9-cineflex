@@ -106,7 +106,7 @@ export default function AssentoEscolha() {
 
                 <div className="bloco-input">
                     CPF do comprador
-                    <input placeholder="Digite seu CPF... xxxxxxxxxxx" className="input"
+                    <input placeholder="Digite seu CPF... xxx.xxx.xxx-xx" className="input"
                         type="text"
                         pattern="([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})"
                         value={cpf}
