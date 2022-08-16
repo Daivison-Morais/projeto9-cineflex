@@ -1,6 +1,9 @@
 
 <h2>Cineflex</h2>
 <h4>o App cineflex, por meio de api's, permite selecionar filme, data, horário, posições de poltrona disponíveis e por fim exibe uma tela contendo todos dados citados.</h4>
+<br>
+deploy:
+https://projeto9-cineflex-ten-psi.vercel.app/
 
 
 
