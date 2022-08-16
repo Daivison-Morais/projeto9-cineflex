@@ -1,3 +1,19 @@
+
+<h2>Cineflex</h2>
+<h4>o App cineflex, por meio de api's, permite selecionar filme, data, horário, posições de poltrona disponíveis e por fim exibe uma tela contendo todos dados citados.</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
