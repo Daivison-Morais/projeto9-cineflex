@@ -2,6 +2,7 @@
 ## Cineflex
 <h4>Faça o controle de sessões de cinema com o app Cineflex!</h4>
 <br>
+
 <img src="./src/assets/img/propCineflex.jpg" />
 deploy:
 https://projeto9-cineflex-ten-psi.vercel.app/
