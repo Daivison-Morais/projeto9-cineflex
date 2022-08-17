@@ -1,6 +1,6 @@
 
 ## Cineflex
-<h4>o App cineflex, permite fazer o controle de sessões de filmes, horaios e poltronas disponíveis para cada sessão.</h4>
+<h4>Faça o controle de sessões de cinema com o app Cineflex!</h4>
 <br>
 deploy:
 https://projeto9-cineflex-ten-psi.vercel.app/
