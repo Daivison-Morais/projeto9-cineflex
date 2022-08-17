@@ -22,7 +22,6 @@ export default function AssentoEscolha() {
 
     }
 
-    
     const params2 = useParams();
     const navigate = useNavigate();
     const [assentos, setAssentos] = useState([]);
