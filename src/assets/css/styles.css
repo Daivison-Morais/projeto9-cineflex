@@ -281,8 +281,9 @@ body{
 .txt-rodape {
     font-size: 26px;
     font-weight: 400;
+    line-height: 22px;
     color: #293845;
-    margin: 7px 10px;
+    margin: 4px 10px;
 }
 
 .cor-selecionado {

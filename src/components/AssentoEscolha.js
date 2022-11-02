@@ -5,137 +5,157 @@ import { cpf as isCpf } from "cpf-cnpj-validator";
 import Assento from "./Assento";
 
 export default function AssentoEscolha() {
+  const params2 = useParams();
+  const navigate = useNavigate();
 
-    function handleForm(event) {
-        event.preventDefault();
-        if (isCpf.isValid(cpf)) {
-            navigate("/sucesso", { state: { name: nome,  cpf: cpf, nump: nump, namefilme: namefilme, horariofilme: horariofilme, horario: sessaorodape.name, data: data} })
-        }
+  const [sessao, setSessao] = useState([]);
+  const [array, setArray] = useState([]);
+  const [nump, SetNump] = useState([]);
+  const [form, setForm] = useState({
+    nome: "",
+    cpf: "",
+  });
 
-         const body = {
-            ids: array,
-            name: nome,
-            cpf: cpf
-        }
+  useEffect(() => {
+    const promisse = axios.get(
+      `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${params2.idsessao}/seats`
+    );
+    promisse.then((resposta) => {
+      setSessao(resposta.data);
+    });
+  }, []);
 
-        const requisicao = axios.post("https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many", body);
+  const body = {
+    ids: array,
+    nome: form.nome,
+    cpf: form.cpf,
+  };
 
+  function handleForm(event) {
+    setForm({ ...form, [event.target.name]: event.target.value });
+  }
+
+  function submit(event) {
+    event.preventDefault();
+
+    if (isCpf.isValid(form.cpf)) {
+      navigate("/sucesso", {
+        state: {
+          name: form.nome,
+          cpf: form.cpf,
+          nump: nump,
+          namefilme: sessao.movie.title,
+          horariofilme: sessao.day.weekday,
+          horario: sessao.name,
+          data: sessao.day.date,
+        },
+      });
+    } else {
+      alert("cpf inválido");
     }
+    const requisicao = axios.post(
+      "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many",
+      body
+    );
+  }
 
-    const params2 = useParams();
-    const navigate = useNavigate();
-    const [assentos, setAssentos] = useState([]);
-    const [postrodape, setPostrodape] = useState([]);
-    const [sessaorodape, setsessaorodape] = useState([]);
-    const [horariofilme, setHorariofilme] = useState([]);
-    const [namefilme, setNamefilme] = useState([]);
-    const [array, setArray] = useState([]);
-    const [nump, SetNump] = useState([]);
-    const [nome, setNome] = useState("");
-    const [cpf, setCpf] = useState("");
-    const [data, setData] = useState("");
-    
-    useEffect(() => {
+  /*  console.log("array:", array);
+  console.log(nump); */
 
-        const promisse = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${params2.idsessao}/seats`);
-        promisse.then((resposta) => {
-            setAssentos(resposta.data.seats);
-            setPostrodape(resposta.data.movie.posterURL);
-            setNamefilme(resposta.data.movie.title);
-            setsessaorodape(resposta.data);
-            setHorariofilme(resposta.data.day.weekday);
-            setData(resposta.data.day.date);
-        })
-    }, [])
+  return (
+    <>
+      <div className="txt-selecione-filme">Selecione o(s) Assento(s)</div>
 
-    console.log("array:", array);
-    console.log(nump);
+      <div className="faixa-centraliza">
+        <div className="assentos">
+          {sessao.seats?.map((assento, index) => (
+            <Assento
+              numpoutrona={`${index + 1} `}
+              numAssento={assento.name}
+              nump={nump}
+              SetNump={SetNump}
+              isAvailable={assento.isAvailable}
+              idAssento={assento.id}
+              array={array}
+              setArray={setArray}
+            />
+          ))}
+        </div>
+      </div>
 
+      <div className="faixa-centraliza">
+        <div className="space-betweem">
+          <div className="centraliza">
+            <div className="selecionado"></div>
+            <div>Selecionado</div>
+          </div>
 
-    return (
+          <div className="centraliza">
+            <div className="disponivel"></div>
+            <div>Disponivel</div>
+          </div>
 
-        <>
+          <div className="centraliza">
+            <div className="indisponivel"></div>
+            <div>Indisponivel</div>
+          </div>
+        </div>
+      </div>
 
-            <div className="txt-selecione-filme">
-                Selecione o(s) Assento(s)
-            </div>
+      <form onSubmit={submit}>
+        <div className="bloco-input">
+          Nome do comprador
+          <input
+            placeholder="Digite seu nome..."
+            className="input"
+            type="text"
+            value={form.nome}
+            name="nome"
+            onChange={handleForm}
+            required
+          />
+        </div>
 
-            <div className="faixa-centraliza">
-                <div className="assentos">
+        <div className="bloco-input">
+          CPF do comprador
+          <input
+            placeholder="Digite seu CPF... xxx.xxx.xxx-xx"
+            className="input"
+            pattern="([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})"
+            value={form.cpf}
+            name="cpf"
+            onChange={handleForm}
+          ></input>
+        </div>
 
-                    {assentos.map((assento, index)=> (
+        <div className="faixa-centraliza">
+          <button
+            className="button"
+            type="submit"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                submit();
+              }
+            }}
+          >
+            {" "}
+            Reservar assentos
+          </button>
+        </div>
+      </form>
 
-                        <Assento  numpoutrona={`${index+1} `} numAssento={assento.name} nump={nump} SetNump={SetNump}  isAvailable={assento.isAvailable} idAssento={assento.id} array={array} setArray={setArray}/>
+      <div className="rodape">
+        <div>
+          <img className="img-filme" src={sessao.movie?.posterURL} alt="" />
+        </div>
+        <div>
+          <div className="txt-rodape">{sessao.movie?.title}</div>
 
-                    ))}
-
-                </div>
-            </div>
-
-            <div className="faixa-centraliza">
-                <div className="space-betweem">
-                    <div className="centraliza">
-                        <div className="selecionado">
-                        </div>
-                        <div>Selecionado</div>
-                    </div>
-
-                    <div className="centraliza">
-                        <div className="disponivel"></div>
-                        <div>Disponivel</div>
-                    </div>
-
-                    <div className="centraliza">
-                        <div className="indisponivel"></div>
-                        <div>Indisponivel</div>
-                    </div>
-                </div>
-            </div>
-
-            <form onSubmit={handleForm}>
-                <div className="bloco-input">
-                    Nome do comprador
-
-                    <input placeholder="Digite seu nome..." className="input"
-                        type="text"
-                        value={nome}
-                        onChange={(event) => setNome(event.target.value)}
-                        required />
-                </div>
-
-                <div className="bloco-input">
-                    CPF do comprador
-                    <input placeholder="Digite seu CPF... xxx.xxx.xxx-xx" className="input"
-                        type="text"
-                        pattern="([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})"
-                        value={cpf}
-                        onChange={(event) => setCpf(event.target.value)}
-                        required
-
-                    ></input>
-                </div>
-
-                <div className="faixa-centraliza">
-                    <button className="button" type="submit"> Reservar assentos</button>
-                </div>
-            </form>
-
-            <div className="rodape">
-                <div >
-                    <img className="img-filme" src={postrodape} alt="" />
-                </div>
-                <div>
-                    <div className="txt-rodape">
-                        {namefilme}
-                    </div>
-
-                    <div className="txt-rodape">
-                        {horariofilme}-{sessaorodape.name}
-                    </div>
-
-                </div>
-            </div>
-
-        </>
-    )
+          <div className="txt-rodape">
+            {sessao.day?.weekday}-{sessao.name}
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
