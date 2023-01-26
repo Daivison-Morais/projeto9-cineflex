@@ -1,9 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import Button from "./Button";
 
 export default function TelaSucesso() {
   const location = useLocation();
-  console.log(location);
-
   const navigate = useNavigate();
 
   document.addEventListener("keydown", function (e) {
@@ -46,10 +45,7 @@ export default function TelaSucesso() {
       </div>
 
       <div className="faixa-centraliza">
-        <button className="button" onClick={() => navigate("/")}>
-          {" "}
-          Voltar para Home
-        </button>
+        <Button onClick={() => navigate("/")}>Voltar para Home</Button>
       </div>
     </>
   );

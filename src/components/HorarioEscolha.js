@@ -1,7 +1,7 @@
 import Rodape from "./Rodape";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { getHorarios } from "../services";
 
 export default function HorarioEscolha() {
   const navigate = useNavigate();
@@ -11,11 +11,7 @@ export default function HorarioEscolha() {
   const [infrodape, setInfrodape] = useState([]);
 
   useEffect(() => {
-    console.log(params);
-    const promisse = axios.get(
-      `https://mock-api.driven.com.br/api/v8/cineflex/movies/${params.idfilme}/showtimes`
-    );
-    promisse.then((resposta) => {
+    getHorarios(params).then((resposta) => {
       setSessoes(resposta.data.days);
       setInfrodape(resposta.data);
     });

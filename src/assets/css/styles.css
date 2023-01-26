@@ -17,6 +17,7 @@ body{
 }
 
 .topo {
+    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,7 +25,8 @@ body{
     height: 67px;
     font-size: 34px;
     color: #E8833A;
-    background-color: #C3CFD9;
+    background-color: #a2bfd7;
+    box-shadow: 0px 0px 9px 2px black;
     position: fixed;
     top: 0px;
     left: 0px;
@@ -55,14 +57,16 @@ body{
     border-color: aliceblue;
     border-radius: 4px;
     box-shadow: 0px 0px 9px 2px black;
-    flex-wrap: wrap;
     margin-bottom: 26px;
 
 }
 
+.filme:hover{
+    transform: scale(1.1)
+}
+
 .bloco-horario {
     margin-left: 25px;
-
     font-size: 20px;
     font-weight: 400;
 }
@@ -93,6 +97,7 @@ body{
 
 .teste {
     width: 42%;
+    margin: 0 10px 0 10px;
 }
 
 .faixa-centraliza {
@@ -289,4 +294,10 @@ body{
 .cor-selecionado {
     border-color: #1AAE9E;
     background-color: #8DD7CF;
+}
+
+@media (min-width: 530px) {
+	.teste{
+		width: 240px;
+	}
 }

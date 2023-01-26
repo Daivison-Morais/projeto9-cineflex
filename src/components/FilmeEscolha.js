@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getFilmes } from "../services";
 
 function ItemFilme({ src, keys }) {
   return (
@@ -14,12 +14,13 @@ export default function FilmeEscolha() {
   const [image, setImage] = useState([]);
 
   useEffect(() => {
-    const promisse = axios.get(
-      `https://mock-api.driven.com.br/api/v8/cineflex/movies/`
-    );
-    promisse.then((resposta) => {
-      setImage(resposta.data);
-    });
+    getFilmes()
+      .then((resposta) => {
+        setImage(resposta.data);
+      })
+      .catch(() => {
+        alert("efssssssssssss");
+      });
   }, []);
 
   return (

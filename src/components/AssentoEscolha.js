@@ -1,8 +1,9 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { cpf as isCpf } from "cpf-cnpj-validator";
 import Assento from "./Assento";
+import Button from "./Button";
+import { getAssentos, postDados } from "../services";
 
 export default function AssentoEscolha() {
   const params2 = useParams();
@@ -17,12 +18,11 @@ export default function AssentoEscolha() {
   });
 
   useEffect(() => {
-    const promisse = axios.get(
-      `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${params2.idsessao}/seats`
-    );
-    promisse.then((resposta) => {
-      setSessao(resposta.data);
-    });
+    getAssentos(params2)
+      .then((resposta) => {
+        setSessao(resposta.data);
+      })
+      .catch(() => {});
   }, []);
 
   const body = {
@@ -30,6 +30,7 @@ export default function AssentoEscolha() {
     nome: form.nome,
     cpf: form.cpf,
   };
+  console.log(body);
 
   function handleForm(event) {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -53,14 +54,9 @@ export default function AssentoEscolha() {
     } else {
       alert("cpf inválido");
     }
-    const requisicao = axios.post(
-      "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many",
-      body
-    );
-  }
 
-  /*  console.log("array:", array);
-  console.log(nump); */
+    postDados(body);
+  }
 
   return (
     <>
@@ -129,8 +125,7 @@ export default function AssentoEscolha() {
         </div>
 
         <div className="faixa-centraliza">
-          <button
-            className="button"
+          <Button
             type="submit"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -138,9 +133,8 @@ export default function AssentoEscolha() {
               }
             }}
           >
-            {" "}
             Reservar assentos
-          </button>
+          </Button>
         </div>
       </form>
 

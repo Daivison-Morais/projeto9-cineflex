@@ -1,55 +1,52 @@
 import { useState } from "react";
 
+export default function Assento({
+  numAssento,
+  isAvailable,
+  idAssento,
+  array,
+  setArray,
+  numpoutrona,
+  SetNump,
+  nump,
+}) {
+  const [assentoselecionado, setAssentoselecionado] = useState(false);
 
-export default function Assento({ numAssento, isAvailable, idAssento, array, setArray, numpoutrona, SetNump, nump}) {
-
-    let corSelecionado = "";
-    const [assentoselecionado, setAssentoselecionado] = useState(false);
-    if(assentoselecionado === true){
-        corSelecionado = "cor-selecionado";
-    } else{
-        corSelecionado = "";
+  function ehSelecionado() {
+    if (!isAvailable) {
+      return alert("Esse assento não está disponível");
     }
 
-    function ehSelecionado() {
+    setAssentoselecionado(!assentoselecionado);
 
-        setAssentoselecionado(!assentoselecionado);
-     
-        if(array.includes(idAssento) === true){
-            const arrayaux = [...array];
-            const numpaux = [...nump];
-            for(let i = 0; i < array.length; i++){
-                if(idAssento === array[i]){
-                    arrayaux.splice(i, 1);
-                    setArray(arrayaux);
-                   
-                }
-                if(numpoutrona === nump[i]){
-                    numpaux.splice(i, 1);
-                    SetNump(numpaux);
-                   
-                }
-            }
-
-        } else{
-            setArray([...array, idAssento])
-            SetNump([...nump, numpoutrona])
-
+    // idAssento 887
+    if (array.includes(idAssento) === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (idAssento === array[i]) {
+          //[887] para Api
+          array.splice(i, 1);
+          setArray(array);
         }
-       
-    }
-
-    if (isAvailable) {
-        return (
-            <div className={`assento cor-disponivel ${corSelecionado}`} onClick={ehSelecionado}>
-                {numAssento}
-            </div>
-        )
+        if (numpoutrona === nump[i]) {
+          //["37"]  para a tela de sucesso
+          nump.splice(i, 1);
+          SetNump(nump);
+        }
+      }
     } else {
-        return (
-            <div className="assento cor-indisponivel" onClick={() => alert("Esse assento não está disponível")} >
-                {numAssento}
-            </div>
-        )
+      setArray([...array, idAssento]);
+      SetNump([...nump, numpoutrona]);
     }
+  }
+
+  return (
+    <div
+      className={`${
+        isAvailable ? "assento cor-disponivel" : "assento cor-indisponivel"
+      }  ${assentoselecionado ? "cor-selecionado" : ""}`}
+      onClick={ehSelecionado}
+    >
+      {numAssento}
+    </div>
+  );
 }
